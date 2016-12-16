@@ -5,6 +5,10 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 
+#include "Nave.h"
+#include "Planeta.h"
+#include "igvTextura.h"
+
 /**************************************************************************************************************************************/
 /**                                                                                                                                  **/
 /**                                          Clase igvEscena3D                                                                       **/
@@ -19,7 +23,7 @@ public:
   igvEscena3D();                                                                          // Constructor
   ~igvEscena3D();                                                                         // Destructor
   
-  void visualizar();                                                                      // MŽtodo donde se dibuja la escena
+  void visualizar(tVector3 pos);                                                         // MŽtodo donde se dibuja la escena
   
   void setEjes(bool _ejes)   { ejes = _ejes; } ;                                          // Pinta los ejes
   bool getEjes()             { return ejes; } ;                                           // Devuelve si los ejes est‡n pintados o no

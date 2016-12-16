@@ -30,6 +30,9 @@ public:
   tVector3 operator*(float number)      { return tVector3(x * number,    y * number,    z * number); }
   tVector3 operator/(float number)      { return tVector3(x / number,    y / number,    z / number); }
   
+  static float distancia(tVector3 v1, tVector3 v2)  { return sqrt(pow(v1.x - v2.x, 2) +
+                                                                  pow(v1.y - v2.y, 2) +
+                                                                  pow(v1.z - v2.z, 2)); }
   
   float x, y, z;
 };

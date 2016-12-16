@@ -1,11 +1,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
+#include <vector>
 
 #include "igvEscena3D.h"
-#include "Nave.h"
-#include "Planeta.h"
-#include "igvTextura.h"
+
 
 // Metodos constructores
 
@@ -50,15 +49,8 @@ void pintarQuadPlanoXZbot(float div_x, float div_z, float inicio, float fin) {
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
   
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -75,9 +67,7 @@ void pintarQuadPlanoXZbot(float div_x, float div_z, float inicio, float fin) {
         glVertex3f(i + divisionX, 0.0, j);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
@@ -88,15 +78,8 @@ void pintarQuadPlanoYZleft(float div_x, float div_z, float inicio, float fin) {
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
   
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -113,9 +96,7 @@ void pintarQuadPlanoYZleft(float div_x, float div_z, float inicio, float fin) {
       glVertex3f(0.0, i + divisionX, j);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
@@ -126,15 +107,8 @@ void pintarQuadPlanoXYback(float div_x, float div_z, float inicio, float fin) {
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
   
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -151,9 +125,7 @@ void pintarQuadPlanoXYback(float div_x, float div_z, float inicio, float fin) {
       glVertex3f(i + divisionX, j, 0.0);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
@@ -164,15 +136,8 @@ void pintarQuadPlanoXZtop(float div_x, float div_z, float inicio, float fin) {
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
   
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -189,9 +154,7 @@ void pintarQuadPlanoXZtop(float div_x, float div_z, float inicio, float fin) {
       glVertex3f(i + divisionX, fin, j);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
@@ -201,16 +164,9 @@ void pintarQuadPlanoXYfront(float div_x, float div_z, float inicio, float fin) {
   
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
-  
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -227,9 +183,7 @@ void pintarQuadPlanoXYfront(float div_x, float div_z, float inicio, float fin) {
       glVertex3f(i + divisionX, j, fin);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
@@ -240,15 +194,8 @@ void pintarQuadPlanoYZright(float div_x, float div_z, float inicio, float fin) {
   float divisionX = tam_x / div_x;
   float divisionZ = tam_z / div_z;
   
-  float altura = 1.0 / div_z;
-  float ancho  = 1.0 / div_x;
-  
-  float contmapx = 0.0;
-  float contmapz = 1.0;
-  
-  for (float i = 0.0; i <= tam_x; i += divisionX){
-    contmapz = 1.0;
-    for (float j = 0.0; j <= tam_z; j += divisionZ){
+  for (float i = 0.0; i < tam_x; i += divisionX){
+    for (float j = 0.0; j < tam_z; j += divisionZ){
       glNormal3f(0, 1, 0);
       glBegin(GL_QUADS);
       
@@ -265,23 +212,21 @@ void pintarQuadPlanoYZright(float div_x, float div_z, float inicio, float fin) {
       glVertex3f(fin, i + divisionX, j);
       
       glEnd();
-      contmapz = contmapz - altura;
     }
-    contmapx = contmapx + ancho;
   }
 }
 
-tVector3 random1(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random2(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random3(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random4(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random5(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random6(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random7(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
-tVector3 random8(rand() % 40 + 1, rand() % 40 + 1, rand() % 40 + 1);
+tVector3 random1(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random2(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random3(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random4(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random5(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random6(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random7(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
+tVector3 random8(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 
 
-void igvEscena3D::visualizar(void) {
+void igvEscena3D::visualizar(tVector3 camara) {
 	glPushMatrix();
 	  if (ejes)
       pintarEjes();
@@ -294,7 +239,10 @@ void igvEscena3D::visualizar(void) {
     glLightfv(GL_LIGHT0, GL_POSITION, luz0); // la luz se coloca aquí si permanece fija y no se mueve con la escena
     glEnable(GL_LIGHT0);
   
-    //Dibuja el skybox
+    /*
+     * ESTO ES EL SKYBOX HECHO CON QUADS.
+     * Ha sido reemplazado porque las texturas no se ve’an nada realistas
+     *
     igvTextura textSB1("/Users/dani/Desktop/texturas/skybox/sb1.bmp");
     textSB1.aplicar();
     pintarQuadPlanoXZbot(1, 1, 0, 50);
@@ -313,20 +261,50 @@ void igvEscena3D::visualizar(void) {
     igvTextura textSB6("/Users/dani/Desktop/texturas/skybox/sb6.bmp");
     textSB6.aplicar();
     pintarQuadPlanoXZtop(1, 1, 0, 50);
+     */
+  
+    // Dibuja el skybox
+    GLfloat azul[]={0,0,1,1.0};
+    glMaterialfv(GL_FRONT,GL_EMISSION, azul);
+    glPushMatrix();
+      glTranslatef(25, 25, 25);
+      GLuint id;
+      glGenTextures(1, &id);
+      GLUquadric *qobj = gluNewQuadric();
+      gluQuadricTexture(qobj,GL_TRUE);
+      glBindTexture(GL_TEXTURE_2D, id);
+      glEnable(GL_TEXTURE_2D);
+      igvTextura textSB("/Users/dani/Desktop/texturas/skybox/sbSphere.bmp");
+      textSB.aplicar();
+      gluSphere(qobj,50,50,50);
+      gluDeleteQuadric(qobj);
+      glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
   
   
-    //Dibuja los planetas
+    // Dibuja los planetas
+    tVector3 pSol(0, 0, 0);
+    tVector3 pMer(5, 5, 5);
+    tVector3 pVen(10, 10, 10);
+    tVector3 pTie(15, 15, 15);
+    tVector3 pMar(20, 20, 20);
+    tVector3 pJup(25, 25, 25);
+    tVector3 pSat(30, 30, 30);
+    tVector3 pUra(35, 35, 35);
+    tVector3 pNep(40, 40, 40);
+    tVector3 pPlu(45, 45, 45);
   
-    Planeta sol(      "sol",      tVector3(1, 1, 1));
-    Planeta mercurio( "mercurio", tVector3(1, 1, 1));
-    Planeta venus(    "venus",    tVector3(1, 1, 1));
-    Planeta tierra(   "tierra",   tVector3(1, 1, 1));
-    Planeta marte(    "marte",    tVector3(1, 1, 1));
-    Planeta jupiter(  "jupiter",  tVector3(1, 1, 1));
-    Planeta saturno(  "saturno",  tVector3(1, 1, 1));
-    Planeta urano(    "urano",    tVector3(1, 1, 1));
-    Planeta neptuno(  "neptuno",  tVector3(1, 1, 1));
-    Planeta pluton(   "pluton",   tVector3(1, 1, 1));
+  
+    Planeta sol(      "sol",      pSol);
+    Planeta mercurio( "mercurio", pMer);
+    Planeta venus(    "venus",    pVen);
+    Planeta tierra(   "tierra",   pTie);
+    Planeta marte(    "marte",    pMar);
+    Planeta jupiter(  "jupiter",  pJup);
+    Planeta saturno(  "saturno",  pSat);
+    Planeta urano(    "urano",    pUra);
+    Planeta neptuno(  "neptuno",  pNep);
+    Planeta pluton(   "pluton",   pPlu);
 
     sol.dibujar();
     mercurio.dibujar();
@@ -339,9 +317,14 @@ void igvEscena3D::visualizar(void) {
     neptuno.dibujar();
     pluton.dibujar();
   
+  /*std::cout << "\t\t" << tVector3::distancia(pSol, camara) << std::endl;
+  std::cout << "\tYo "   << camara.x << " - " << camara.y << " - "  << camara.z << std::endl;
+  std::cout << "\tSol "   << pSol.x << " - " << pSol.y << " - "  << pSol.z << std::endl;
+   */
+    if(tVector3::distancia(pSol, camara) > 10) {
+    }
   
-  
-    //Dibuja las naves
+    // Dibuja las naves
     Nave nave1("satelite", tVector3(5, 10, 5));
     Nave nave2("satelite", tVector3(random2.x, random2.y, random2.z));
     Nave nave3("satelite", tVector3(random3.x, random3.y, random3.z));

@@ -38,8 +38,8 @@ void igvInterfaz::configurarEntorno(int argc, char** argv,
   glutInitWindowPosition(_pos_X,_pos_Y);                                                  // Inicializa la posici—n de la ventana
   glutCreateWindow(_titulo.c_str());                                                      // Inicializa el nombre de la ventana
   
-  camara.posicionarCamara(30, 30, 10,                                                       // Posici—n de la c‡mara
-                          1, 0.5, 0.5,                                                        // Hacia d—nde mira
+  camara.posicionarCamara(40, 40, 1,                                                       // Posici—n de la c‡mara
+                          25, 25, 25,                                                        // Hacia d—nde mira
                           0, 1, 0);                                                       // Vector arriba
 }
 
@@ -83,7 +83,7 @@ void igvInterfaz::setDisplay() {
   
   Camera();                                                                               // Llama al set-up de la c‡mara
   Enables();                                                                              // Hace los glEnables correspondientes
-  interfaz.escena.visualizar();                                                           // Dibuja la escena
+  interfaz.escena.visualizar(camara.mPos);                                                // Dibuja la escena
   
   glutSwapBuffers();                                                                      // Refresca la ventana sin parpadeos
 }
@@ -142,15 +142,15 @@ void igvInterfaz::movimientoRaton(int x, int y) {
   
   //std::cout << "\nX: " << x << " Y: " << y;                                             // Muestra la posici—n del rat—n
   
-  
-  if(x < 0 || x > interfaz.getAlto()) return;                                             // Evita que se actualice fuera de la ventana
-  if(y < 0 || y > interfaz.getAncho()) return;
-  
+  if(!fullScreen){
+    if(x < 0 || x > interfaz.getAlto()) return;                                             // Evita que se actualice fuera de la ventana
+    if(y < 0 || y > interfaz.getAncho()) return;
+  }
   
   //glutWarpPointer(midX, midY);
   
   angY = static_cast<GLfloat>( (midX - x) ) / 10000;                                       // Movimiento del rat—n y su velocidad
-  angZ = static_cast<GLfloat>( (midY - y) ) / 1000;
+  angZ = static_cast<GLfloat>( (midY - y) ) / 500;
   
   //std::cout << "\n\t ang Y: " << angY << " ang >: " <<  angZ;
   

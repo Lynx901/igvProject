@@ -53,13 +53,13 @@ GLfloat uno[]    = {1.0, 1.0, 1.0};
 GLfloat angle = 0;
 
 void Planeta::dibujar() {
-  angle += 0.05;
+  angle += 0.1;
   glPushMatrix();
   
     if(nombre == "sol") {
       glMaterialfv(GL_FRONT,GL_EMISSION,uno);
       glPushMatrix();
-        glTranslatef(2, 2, 2);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
       
         GLuint id;
@@ -70,7 +70,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
           igvTextura textSol("/Users/dani/Desktop/texturas/sol.bmp");
           textSol.aplicar();
-          gluSphere(qobj,5,50,50);
+          gluSphere(qobj,6,50,50);
           gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
 
@@ -80,7 +80,7 @@ void Planeta::dibujar() {
     if(nombre == "mercurio") {
       glMaterialfv(GL_FRONT,GL_EMISSION,dos);
       glPushMatrix();
-        glTranslatef(7, 7, 7);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
 
         GLuint id;
@@ -101,7 +101,7 @@ void Planeta::dibujar() {
     if(nombre == "venus") {
       glMaterialfv(GL_FRONT,GL_EMISSION,tres);
       glPushMatrix();
-        glTranslatef(9, 9, 9);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -111,7 +111,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textVenus("/Users/dani/Desktop/texturas/venus.bmp");
         textVenus.aplicar();
-        gluSphere(qobj,1.2,50,50);
+        gluSphere(qobj,1.5,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -120,7 +120,7 @@ void Planeta::dibujar() {
     if(nombre == "tierra") {
       glMaterialfv(GL_FRONT,GL_EMISSION,cuatro);
       glPushMatrix();
-        glTranslatef(12, 12, 12);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -130,7 +130,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textTierra("/Users/dani/Desktop/texturas/mapa2.bmp");
         textTierra.aplicar();
-        gluSphere(qobj,1.4,50,50);
+        gluSphere(qobj,2,50,50);
         gluDeleteQuadric(qobj);
       glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -139,7 +139,7 @@ void Planeta::dibujar() {
     if(nombre == "marte") {
       glMaterialfv(GL_FRONT,GL_EMISSION,cinco);
       glPushMatrix();
-        glTranslatef(15, 15, 15);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -149,7 +149,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textMarte("/Users/dani/Desktop/texturas/marte.bmp");
         textMarte.aplicar();
-        gluSphere(qobj,1.6,50,50);
+        gluSphere(qobj,1.5,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -158,7 +158,7 @@ void Planeta::dibujar() {
     if(nombre == "jupiter") {
       glMaterialfv(GL_FRONT,GL_EMISSION,seis);
       glPushMatrix();
-        glTranslatef(18, 18, 18);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -168,7 +168,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textJupiter("/Users/dani/Desktop/texturas/jupiter.bmp");
         textJupiter.aplicar();
-        gluSphere(qobj,3,50,50);
+        gluSphere(qobj,4.5,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -177,7 +177,7 @@ void Planeta::dibujar() {
     if(nombre == "saturno") {
       glMaterialfv(GL_FRONT,GL_EMISSION,siete);
       glPushMatrix();
-        glTranslatef(22, 22, 22);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -187,7 +187,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textSaturno("/Users/dani/Desktop/texturas/saturno.bmp");
         textSaturno.aplicar();
-        gluSphere(qobj,3.2,50,50);
+        gluSphere(qobj,4,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -196,7 +196,7 @@ void Planeta::dibujar() {
     if(nombre == "urano") {
       glMaterialfv(GL_FRONT,GL_EMISSION,ocho);
       glPushMatrix();
-        glTranslatef(27, 27, 27);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -206,7 +206,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textUrano("/Users/dani/Desktop/texturas/urano.bmp");
         textUrano.aplicar();
-        gluSphere(qobj,3.4,50,50);
+        gluSphere(qobj,3.5,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -215,7 +215,7 @@ void Planeta::dibujar() {
     if(nombre == "neptuno") {
       glMaterialfv(GL_FRONT,GL_EMISSION,nueve);
       glPushMatrix();
-        glTranslatef(31, 31, 31);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
@@ -225,7 +225,7 @@ void Planeta::dibujar() {
         glEnable(GL_TEXTURE_2D);
         igvTextura textNeptuno("/Users/dani/Desktop/texturas/neptuno.bmp");
         textNeptuno.aplicar();
-        gluSphere(qobj,4,50,50);
+        gluSphere(qobj,3,50,50);
         gluDeleteQuadric(qobj);
         glDisable(GL_TEXTURE_2D);
       glPopMatrix();
@@ -234,7 +234,7 @@ void Planeta::dibujar() {
     if(nombre == "pluton") {
       glMaterialfv(GL_FRONT,GL_EMISSION,diez);
       glPushMatrix();
-        glTranslatef(35, 35, 35);
+        glTranslatef(posicion.x, posicion.y, posicion.z);
         glRotatef(angle, 0, 1, 0);
         GLuint id;
         glGenTextures(1, &id);
