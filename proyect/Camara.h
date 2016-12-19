@@ -50,6 +50,12 @@ public:
   tVector3 mView;
   tVector3 mUp;
   
+  bool  modoSelect;
+  float anchoSeleccion;
+  float altoSeleccion;
+  
+  Camara(bool modo) {modoSelect = false;};                                                 // Crea la cámara en el modo "visualizar"
+  
   void moverCamara(float velocidad);                                                      // Modifica la posición de la cámara
   
   void rotarVista(float velocidad);                                                       // Modifica la vista de la cámara
@@ -57,6 +63,9 @@ public:
   void posicionarCamara(float pos_x,   float pos_y,  float pos_z,
                         float view_x,  float view_y, float view_z,
                         float up_x,    float up_y,   float up_z);                         // Establece la posición de la cámara
+  
+  void establecerSeleccion(int ancho, int alto, int cX, int cY);
+  
 };
 
 #endif /* Camara_h */

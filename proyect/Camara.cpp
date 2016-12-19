@@ -46,6 +46,43 @@ void Camara::moverCamara(float velocidad) {
     mView.z = mView.z + vVector.z * velocidad;
   }
   
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Control de choque                                          */
+  /*                                                                                    */
+  /**************************************************************************************/
+  /*
+  if(tVector3::distancia(pSol, camara.mPos) < 3) {
+    camara.mPos =
+  }
+  if(tVector3::distancia(pMer, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pVen, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pTie, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pMar, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pJup, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pSat, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pUra, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pNep, camara.mPos) < 3) {
+    
+  }
+  if(tVector3::distancia(pPlu, camara.mPos) < 3) {
+    
+  }
+  */
 }
 
 void Camara::rotarVista(float velocidad) {
@@ -66,3 +103,14 @@ void Camara::posicionarCamara(float pos_x,   float pos_y,  float pos_z,
   mView	= tVector3(view_x, view_y, view_z);
   mUp		= tVector3(up_x,   up_y,   up_z  );
 }
+
+void Camara::establecerSeleccion(int ancho, int alto, int cX, int cY) {
+  modoSelect = true;
+  // ancho y alto de la ventana de selecciÛn
+  anchoSeleccion = ancho;
+  altoSeleccion = alto;
+};
+
+
+
+

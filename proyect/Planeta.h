@@ -22,15 +22,16 @@
 
 class Planeta {
 public:
+  std::string nombre;
+  tVector3    posicion;
+  bool        explotado;
+  
   Planeta(std::string nombre, tVector3 posicion);                                         // Constructor
   Planeta(const Planeta &orig);                                                           // Constructor de copia
   virtual ~Planeta();                                                                     // Destructor
   
   void dibujar();
-  
-private:
-  std::string nombre;
-  tVector3    posicion;
+  void explotar();
   
 };
 

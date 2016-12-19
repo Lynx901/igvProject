@@ -4,12 +4,13 @@
 #include <vector>
 
 #include "igvEscena3D.h"
+#include "igvFuenteLuz.h"
 
 
 // Metodos constructores
 
 igvEscena3D::igvEscena3D () {
-	ejes = true;
+	ejes = false;
 }
 
 igvEscena3D::~igvEscena3D() {
@@ -42,6 +43,7 @@ void pintarEjes(void) {
 	glEnd();
 }
 
+/*
 void pintarQuadPlanoXZbot(float div_x, float div_z, float inicio, float fin) {
   float tam_x = fin;
   float tam_z = fin;
@@ -215,6 +217,7 @@ void pintarQuadPlanoYZright(float div_x, float div_z, float inicio, float fin) {
     }
   }
 }
+*/
 
 tVector3 random1(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 tVector3 random2(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
@@ -225,46 +228,82 @@ tVector3 random6(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 tVector3 random7(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 tVector3 random8(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 
+int const SOL       = 1;
+int const MERCURIO  = 2;
+int const VENUS     = 3;
+int const TIERRA    = 4;
+int const MARTE     = 5;
+int const JUPITER   = 6;
+int const SATURNO   = 7;
+int const URANO     = 8;
+int const NEPTUNO   = 9;
+int const PLUTON    = 10;
 
-void igvEscena3D::visualizar(tVector3 camara) {
+
+
+void igvEscena3D::visualizar(Camara camara) {
+
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Instrucciones                                              */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+  GLfloat blanco[]={1.0, 1.0, 1.0, 1.0};
+  glMaterialfv(GL_FRONT,GL_EMISSION, blanco);
+  
+  igvTextura instrucciones("/Users/dani/Desktop/texturas/instrucciones.bmp");
+  instrucciones.aplicar();
+  
+  glNormal3f(0, 1, 0);
+  glBegin(GL_QUADS);
+  
+    glTexCoord2f(0, 0);
+    glVertex3f(25, 25, 25);
+    
+    glTexCoord2f(1, 0);
+    glVertex3f(35, 25, 25);
+    
+    glTexCoord2f(1, 1);
+    glVertex3f(35, 35, 25);
+    
+    glTexCoord2f(0, 1);
+    glVertex3f(25, 35, 25);
+  
+  glEnd();
+  
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                                 Focos                                              */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+  posFoco1    = posFoco2    = camara.mPos;
+  posFoco1.x  = camara.mPos.x + 3;
+  posFoco2.x  = camara.mPos.x - 3;
+  
 	glPushMatrix();
 	  if (ejes)
       pintarEjes();
+  
+  igvColor cAmbF(0.0, 0.0, 0.0, 1.0);
+  igvColor cDifF(1.0, 1.0, 1.0, 1.0);
+  igvColor cEspF(1.0, 1.0, 1.0, 1.0);
+  
+  igvFuenteLuz foco1(GL_LIGHT1, posFoco1, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 30, 10);
+  foco1.aplicar();
 
-                                                                                          // Las luces se aplican antes de las  transformaciones a la escena para que permanezcan fijas
+  igvFuenteLuz foco2(GL_LIGHT2, posFoco2, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 30, 10);
+  foco2.aplicar();
 
   
-    GLfloat luz0[4]={5,5,5,2}; // luz puntual
-    glShadeModel(GL_SMOOTH);
-    glLightfv(GL_LIGHT0, GL_POSITION, luz0); // la luz se coloca aquí si permanece fija y no se mueve con la escena
-    glEnable(GL_LIGHT0);
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Dibujo de skybox                                           */
+  /*                                                                                    */
+  /**************************************************************************************/
   
-    /*
-     * ESTO ES EL SKYBOX HECHO CON QUADS.
-     * Ha sido reemplazado porque las texturas no se ve’an nada realistas
-     *
-    igvTextura textSB1("/Users/dani/Desktop/texturas/skybox/sb1.bmp");
-    textSB1.aplicar();
-    pintarQuadPlanoXZbot(1, 1, 0, 50);
-    igvTextura textSB2("/Users/dani/Desktop/texturas/skybox/sb2.bmp");
-    textSB2.aplicar();
-    pintarQuadPlanoYZleft(1, 1, 0, 50);
-    igvTextura textSB3("/Users/dani/Desktop/texturas/skybox/sb3.bmp");
-    textSB3.aplicar();
-    pintarQuadPlanoXYback(1, 1, 0, 50);
-    igvTextura textSB4("/Users/dani/Desktop/texturas/skybox/sb4.bmp");
-    textSB4.aplicar();
-    pintarQuadPlanoXYfront(1, 1, 0, 50);
-    igvTextura textSB5("/Users/dani/Desktop/texturas/skybox/sb5.bmp");
-    textSB5.aplicar();
-    pintarQuadPlanoYZright(1, 1, 0, 50);
-    igvTextura textSB6("/Users/dani/Desktop/texturas/skybox/sb6.bmp");
-    textSB6.aplicar();
-    pintarQuadPlanoXZtop(1, 1, 0, 50);
-     */
-  
-    // Dibuja el skybox
-    GLfloat azul[]={0,0,1,1.0};
+  GLfloat azul[]={0,0,1,1.0};
     glMaterialfv(GL_FRONT,GL_EMISSION, azul);
     glPushMatrix();
       glTranslatef(25, 25, 25);
@@ -282,17 +321,15 @@ void igvEscena3D::visualizar(tVector3 camara) {
     glPopMatrix();
   
   
-    // Dibuja los planetas
-    tVector3 pSol(0, 0, 0);
-    tVector3 pMer(5, 5, 5);
-    tVector3 pVen(10, 10, 10);
-    tVector3 pTie(15, 15, 15);
-    tVector3 pMar(20, 20, 20);
-    tVector3 pJup(25, 25, 25);
-    tVector3 pSat(30, 30, 30);
-    tVector3 pUra(35, 35, 35);
-    tVector3 pNep(40, 40, 40);
-    tVector3 pPlu(45, 45, 45);
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Dibujo de planetas                                         */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+  tVector3 pSol(0, 0, 0),    pMer(5, 5, 5),    pVen(10, 10, 10), pTie(15, 15, 15),
+             pMar(20, 20, 20), pJup(25, 25, 25), pSat(30, 30, 30), pUra(35, 35, 35),
+             pNep(40, 40, 40), pPlu(45, 45, 45);
   
   
     Planeta sol(      "sol",      pSol);
@@ -305,27 +342,105 @@ void igvEscena3D::visualizar(tVector3 camara) {
     Planeta urano(    "urano",    pUra);
     Planeta neptuno(  "neptuno",  pNep);
     Planeta pluton(   "pluton",   pPlu);
+  
+    glPushName(SOL);
+      sol.dibujar();
+    glPopName();
+  
+    glPushName(MERCURIO);
+      mercurio.dibujar();
+    glPopName();
+    
+    glPushName(VENUS);
+      venus.dibujar();
+    glPopName();
 
-    sol.dibujar();
-    mercurio.dibujar();
-    venus.dibujar();
-    tierra.dibujar();
-    marte.dibujar();
-    jupiter.dibujar();
-    saturno.dibujar();
-    urano.dibujar();
-    neptuno.dibujar();
-    pluton.dibujar();
+    glPushName(TIERRA);
+      tierra.dibujar();
+    glPopName();
+    
+    glPushName(MARTE);
+      marte.dibujar();
+    glPopName();
+    
+    glPushName(JUPITER);
+      jupiter.dibujar();
+    glPopName();
+    
+    glPushName(SATURNO);
+      saturno.dibujar();
+    glPopName();
+    
+    glPushName(URANO);
+      urano.dibujar();
+    glPopName();
+    
+    glPushName(NEPTUNO);
+      neptuno.dibujar();
+    glPopName();
+    
+    glPushName(PLUTON);
+      pluton.dibujar();
+    glPopName();
+
+  
   
   /*std::cout << "\t\t" << tVector3::distancia(pSol, camara) << std::endl;
   std::cout << "\tYo "   << camara.x << " - " << camara.y << " - "  << camara.z << std::endl;
   std::cout << "\tSol "   << pSol.x << " - " << pSol.y << " - "  << pSol.z << std::endl;
    */
-    if(tVector3::distancia(pSol, camara) > 10) {
+  
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Control de impactos                                        */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+    switch (seleccion) {
+      case 1: // Sol
+        sol.explotar();
+        break;
+      case 2: // Mercurio
+        mercurio.explotar();
+        break;
+      case 3: // Venus
+        venus.explotar();
+        break;
+      case 4: // Tierra
+        tierra.explotar();
+        break;
+      case 5: // Marte
+        marte.explotar();
+        break;
+      case 6: // Jupiter
+        jupiter.explotar();
+        break;
+      case 7: // Saturno
+        saturno.explotar();
+        break;
+      case 8: // Urano
+        urano.explotar();
+        break;
+      case 9: // Neptuno
+        neptuno.explotar();
+        break;
+      case 10: // Pluton
+        pluton.explotar();
+        break;
+        
+    }
+    
+    if(tVector3::distancia(pSol, camara.mPos) < 3) {
+      
     }
   
-    // Dibuja las naves
-    Nave nave1("satelite", tVector3(5, 10, 5));
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Dibujo de naves y satŽlites                                */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+  Nave nave1("satelite", tVector3(5, 10, 5));
     Nave nave2("satelite", tVector3(random2.x, random2.y, random2.z));
     Nave nave3("satelite", tVector3(random3.x, random3.y, random3.z));
     Nave nave4("satelite", tVector3(random4.x, random4.y, random4.z));
@@ -347,11 +462,6 @@ void igvEscena3D::visualizar(tVector3 camara) {
   
   glPopMatrix (); // restaura la matriz de modelado
 }
-
-
-
-
-
 
 
 

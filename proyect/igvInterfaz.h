@@ -14,14 +14,27 @@
 /**                                                                                                                                  **/
 /**************************************************************************************************************************************/
 
+typedef enum {
+  IGV_VISUALIZAR,
+  IGV_SELECCIONAR
+} modoInterfaz;
+
 class igvInterfaz {
 protected:
+  igvEscena3D escena;                                                                     // Escena que se visualiza en la ventana
+  
+  modoInterfaz modo;
+  bool pulsado;
+  int objetoSeleccionado;
+  
+  
+public:
+  float cursorX;
+  float cursorY;
   int anchoVentana;                                                                       // Ancho inicial de la ventana de visualizaci—n
   int altoVentana;                                                                        // Alto inicial de la ventana de visualizaci—n
   
-  igvEscena3D escena;                                                                     // Escena que se visualiza en la ventana
   
-public:
   igvInterfaz();                                                                          // Constructor
   ~igvInterfaz();                                                                         // Destructor
   
@@ -33,7 +46,7 @@ public:
   static void setReshape(int w, int h);                                                   // Define el viewport
   static void setDisplay();                                                               // Define la c‡mara y visualiza la escena
   
-  static void movimientoRaton(int x, int yes);                                              // Controla el desplazamiento del rat—n
+  static void movimientoRaton(int x, int yes);                                            // Controla el desplazamiento del rat—n
   static void pulsacionRaton(GLint boton,GLint estado,GLint x,GLint y);                   // Controla los botones del rat—n
   
   
@@ -45,13 +58,8 @@ public:
   
   void initCallbacks();                                                                   // Inicializa todos los callbacks
   
-  
-  // Getters y setters
-  int getAncho(){return anchoVentana; };
-  int getAlto() {return altoVentana;  };
-  
-  void setAncho(int ancho)  {anchoVentana = ancho; };
-  void setAlto(int alto)    {altoVentana  = alto;  };
+  void initSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);
+  void endSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);
   
 };
 

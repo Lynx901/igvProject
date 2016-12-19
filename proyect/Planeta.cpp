@@ -29,6 +29,7 @@
 Planeta::Planeta(std::string nombre, tVector3 posicion)
 :   nombre(nombre)
   , posicion(posicion)
+  , explotado(false)
 {
   
 };
@@ -40,6 +41,7 @@ Planeta::Planeta(const Planeta &orig) {
 
 Planeta::~Planeta() {};
 
+//Colores por si no cargaran las texturas
 GLfloat diez[]   = {0.1, 0.1, 0.1};
 GLfloat nueve[]  = {0.2, 0.2, 0.2};
 GLfloat ocho[]   = {0.3, 0.3, 0.3};
@@ -56,7 +58,7 @@ void Planeta::dibujar() {
   angle += 0.1;
   glPushMatrix();
   
-    if(nombre == "sol") {
+    if(nombre == "sol" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,uno);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -77,7 +79,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "mercurio") {
+    if(nombre == "mercurio" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,dos);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -98,7 +100,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
   
-    if(nombre == "venus") {
+    if(nombre == "venus" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,tres);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -117,7 +119,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "tierra") {
+    if(nombre == "tierra" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,cuatro);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -136,7 +138,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "marte") {
+    if(nombre == "marte" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,cinco);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -155,7 +157,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "jupiter") {
+    if(nombre == "jupiter" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,seis);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -174,7 +176,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "saturno") {
+    if(nombre == "saturno" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,siete);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -193,7 +195,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "urano") {
+    if(nombre == "urano" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,ocho);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -212,7 +214,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "neptuno") {
+    if(nombre == "neptuno" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,nueve);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -231,7 +233,7 @@ void Planeta::dibujar() {
       glPopMatrix();
     }
     
-    if(nombre == "pluton") {
+    if(nombre == "pluton" && !explotado) {
       glMaterialfv(GL_FRONT,GL_EMISSION,diez);
       glPushMatrix();
         glTranslatef(posicion.x, posicion.y, posicion.z);
@@ -252,3 +254,91 @@ void Planeta::dibujar() {
   
   glPopMatrix();
 }
+
+void Planeta::explotar() {
+  
+  if(nombre == "sol") {
+    glMaterialfv(GL_FRONT,GL_EMISSION,uno);
+    glPushMatrix();
+    glutSolidTeapot(10);
+    
+    glPopMatrix();
+  }
+  
+  if(nombre == "mercurio") {
+    glMaterialfv(GL_FRONT,GL_EMISSION,dos);
+    glPushMatrix();
+    glutSolidTeapot(10);
+
+    
+    glPopMatrix();
+  }
+  
+  if(nombre == "venus" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,tres);
+    glPushMatrix();
+    glutSolidTeapot(10);
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "tierra" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,cuatro);
+    glPushMatrix();
+    glutSolidTeapot(10);
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "marte") {
+    glMaterialfv(GL_FRONT,GL_EMISSION,cinco);
+    glPushMatrix();
+    glutSolidTeapot(10);
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "jupiter" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,seis);
+    glPushMatrix();
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "saturno" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,siete);
+    glPushMatrix();
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "urano" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,ocho);
+    glPushMatrix();
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "neptuno" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,nueve);
+    glPushMatrix();
+
+    glPopMatrix();
+  }
+  
+  if(nombre == "pluton" && explotado) {
+    glMaterialfv(GL_FRONT,GL_EMISSION,diez);
+    glPushMatrix();
+
+    glPopMatrix();
+  }
+
+}
+
+
+
+
+
+
+
+
