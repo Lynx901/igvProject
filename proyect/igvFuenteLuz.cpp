@@ -1,6 +1,14 @@
-#include "igvFuenteLuz.h"
+/**
+ * @file    igvFuenteLuz.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
 
-// Metodos constructores 
+#include "igvFuenteLuz.h"
 
 igvFuenteLuz::igvFuenteLuz() {
 }
@@ -10,14 +18,14 @@ igvFuenteLuz::igvFuenteLuz(const unsigned int _idLuz,
 													 const igvColor & cAmb, const igvColor & cDif, const igvColor & cEsp,
 													 const double a0, const double a1, const double a2) {
 
-  idLuz = _idLuz;
+  idLuz     = _idLuz;
 														 
-	posicion = _posicion;
+	posicion  = _posicion;
 														 
-	colorAmbiente = cAmb;
-	colorDifuso = cDif;
-	colorEspecular = cEsp;
-
+	colorAmbiente   = cAmb;
+	colorDifuso     = cDif;
+	colorEspecular  = cEsp;
+  
 	aten_a0 = a0;
 	aten_a1 = a1;
 	aten_a2 = a2;
@@ -40,17 +48,17 @@ igvFuenteLuz::igvFuenteLuz(const unsigned int _idLuz,
 														 
 	posicion = _posicion;
 														 
-	colorAmbiente = cAmb;
-	colorDifuso = cDif;
-	colorEspecular = cEsp;
+	colorAmbiente   = cAmb;
+	colorDifuso     = cDif;
+	colorEspecular  = cEsp;
 
 	aten_a0 = a0;
 	aten_a1 = a1;
 	aten_a2 = a2;
 
-	direccion_foco = dir_foco;
-	angulo_foco = ang_foco;
-	exponente_foco = exp_foco;
+	direccion_foco  = dir_foco;
+	angulo_foco     = ang_foco;
+	exponente_foco  = exp_foco;
 
 	on = true;
 }
@@ -67,9 +75,9 @@ void igvFuenteLuz::setPosicion(tVector3 pos) {
 
 
 void igvFuenteLuz::set(const igvColor & cAmb, const igvColor & cDif, const igvColor & cEsp) {
-	colorAmbiente = cAmb;
-	colorDifuso = cDif;
-	colorEspecular = cEsp;
+	colorAmbiente   = cAmb;
+	colorDifuso     = cDif;
+	colorEspecular  = cEsp;
 }
 
 void igvFuenteLuz::setAmbiental(const igvColor & cAmb) {

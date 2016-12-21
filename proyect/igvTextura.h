@@ -1,3 +1,13 @@
+/**
+ * @file    igvTextura.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
+
 #ifndef __IGVTEXTURA
 #define __IGVTEXTURA
 
@@ -20,12 +30,12 @@ public:
 		igvTextura(char *fichero);                                                            // Textura cargada desde un fichero BMP
 		~igvTextura();                                                                        // Destructor
 
-		void aplicar(void);
+		void aplicar(void);                                                                   // Aplica la textura
   
 protected:
-		unsigned int idTextura;                                                               // identificador de la textura
-		unsigned int alto;                                                                    // alto de la textura
-    unsigned int ancho;                                                                   // ancho de la textura
+		unsigned int idTextura;                                                               // Identificador de la textura
+		unsigned int alto;                                                                    // Alto de la textura
+    unsigned int ancho;                                                                   // Ancho de la textura
 };
 
 #endif

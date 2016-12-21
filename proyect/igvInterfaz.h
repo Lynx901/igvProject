@@ -1,3 +1,13 @@
+/**
+ * @file    igvInterfaz.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
+
 #ifndef __IGVINTERFAZ
 #define __IGVINTERFAZ
 
@@ -17,23 +27,24 @@
 typedef enum {
   IGV_VISUALIZAR,
   IGV_SELECCIONAR
-} modoInterfaz;
+} modoInterfaz;                                                                           // Enum necesario para el atributo
 
 class igvInterfaz {
 protected:
   igvEscena3D escena;                                                                     // Escena que se visualiza en la ventana
   
-  modoInterfaz modo;
-  bool pulsado;
-  int objetoSeleccionado;
-  bool start;
+  modoInterfaz  modo;                                                                     // Indica si se est‡ seleccionando algo o no
+  bool          pulsado;                                                                  // Indica si se ha pulsado algo
+  int           objetoSeleccionado;                                                       // Indica el objeto que se ha seleccionado
+  
+  bool          start;                                                                    // Indica si la ejecuci—n est‡ en modo "start"
   
 public:
   float cursorX;
   float cursorY;
   int anchoVentana;                                                                       // Ancho inicial de la ventana de visualizaci—n
   int altoVentana;                                                                        // Alto inicial de la ventana de visualizaci—n
-  int contador;
+  int contador;                                                                           // Sirve para saber el estado del juego
   
   igvInterfaz();                                                                          // Constructor
   ~igvInterfaz();                                                                         // Destructor
@@ -58,8 +69,8 @@ public:
   
   void initCallbacks();                                                                   // Inicializa todos los callbacks
   
-  void initSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);
-  void endSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);
+  void initSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);                        // Inicia la selecci—n de objetos
+  void endSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos);                         // Termina la selecci—n de objetos
   
 };
 

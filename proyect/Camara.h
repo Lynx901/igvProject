@@ -11,6 +11,7 @@
 #ifndef Camara_h
 #define Camara_h
 
+#include <iostream>
 #include <math.h>
 
 /**************************************************************************************************************************************/
@@ -36,6 +37,10 @@ public:
                                                                   pow(v1.y - v2.y, 2) +
                                                                   pow(v1.z - v2.z, 2)); }
   
+  void mostrar(){
+    std::cout << "X: " << x << "   Y: " << y << "    Z: " << z << std::endl;
+  }
+  
   float x, y, z;
 };
 
@@ -48,15 +53,15 @@ public:
 class Camara {
 public:
   
-  tVector3 mPos;
-  tVector3 mView;
-  tVector3 mUp;
+  tVector3 mPos;                                                                          // Vector de posición
+  tVector3 mView;                                                                         // Vector de dirección
+  tVector3 mUp;                                                                           // Vector arriba
   
-  bool  modoSelect;
-  float anchoSeleccion;
-  float altoSeleccion;
+  bool  modoSelect;                                                                       // Indica si está en modo selección o no
+  float anchoSeleccion;                                                                   // Ancho de la selección
+  float altoSeleccion;                                                                    // Alto de la selección
   
-  Camara(bool modo) {modoSelect = false;};                                                 // Crea la cámara en el modo "visualizar"
+  Camara(bool modo) { modoSelect = false; };                                              // Crea la cámara en el modo "visualizar"
   
   void moverCamara(float velocidad);                                                      // Modifica la posición de la cámara
   
@@ -66,7 +71,7 @@ public:
                         float view_x,  float view_y, float view_z,
                         float up_x,    float up_y,   float up_z);                         // Establece la posición de la cámara
   
-  void establecerSeleccion(int ancho, int alto, int cX, int cY);
+  void establecerSeleccion(int ancho, int alto, int cX, int cY);                          // Pone la cámara en modo selección
   
 };
 

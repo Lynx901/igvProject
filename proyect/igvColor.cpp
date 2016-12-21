@@ -1,6 +1,14 @@
-#include "igvColor.h"
+/**
+ * @file    igvColor.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
 
-// Constructures
+#include "igvColor.h"
 
 igvColor::igvColor () {
 }

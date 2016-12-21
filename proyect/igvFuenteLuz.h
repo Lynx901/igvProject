@@ -1,3 +1,13 @@
+/**
+ * @file    igvFuenteLuz.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
+
 #ifndef __IGVFUENTELUZ
 #define __IGVFUENTELUZ
 
@@ -10,9 +20,9 @@
 
 class igvFuenteLuz {
 protected:
-  unsigned int  idLuz; // (GL_LIGHT0 a GL_LIGHT7)
+  unsigned int  idLuz;                                                                    // De GL_LIGHT0 a GL_LIGHT7
   
-  tVector3      posicion;
+  tVector3      posicion;                                                                 // Indica la posici—n de la luz
   bool          on;                                                                       // Indica si la luz est‡ encendida o no
   
   igvColor colorAmbiente;

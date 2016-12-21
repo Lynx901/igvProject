@@ -24,13 +24,9 @@
 /**                                                                                    **/
 /****************************************************************************************/
 
-GLfloat angulo = 0;
-
-
 Nave::Nave(std::string tipo, tVector3 posicion)
-:   tipo(tipo)
-  , posicion(posicion)
-{
+: tipo(tipo)
+, posicion(posicion) {
 
 };
 
@@ -41,7 +37,7 @@ Nave::Nave(const Nave &orig) {
 
 Nave::~Nave() {};
 
-
+GLfloat angulo = 0;
 void Nave::dibujar() {
   GLfloat gris[]       = {0.5, 0.5,   0.5};
   GLfloat negro[]      = {0.0, 0.0,   0.0};
@@ -49,9 +45,11 @@ void Nave::dibujar() {
   GLfloat azulClaro[]  = {0.0, 0.55,  1.0};
   GLfloat rojo[]       = {0.8, 0.15,  0.15};
   
-  if(tipo == "satelite") {
+  angulo += 0.005;
 
+  if(tipo == "satelite") {
     glPushMatrix();
+      glRotatef(angulo, 0, 1, 0);
       glTranslatef(posicion.x, posicion.y, posicion.z);
       glScalef(0.05, 0.05, 0.05);
       glMaterialfv(GL_FRONT, GL_EMISSION, gris);
@@ -101,6 +99,7 @@ void Nave::dibujar() {
       // Brazo Derecho
       glMaterialfv(GL_FRONT, GL_EMISSION, negro);
       glPushMatrix();
+    glMaterialf(GL_FRONT, GL_SHININESS, 0.25 * 128.0);
         // Brazo
         glTranslatef(6, 0, 2);
         glRotatef(-90, 0, 1, 0);
@@ -120,6 +119,7 @@ void Nave::dibujar() {
   
   if(tipo == "cohete") {
     glPushMatrix();
+      glRotatef(angulo, 0, 1, 0);
       glTranslatef(posicion.x, posicion.y, posicion.z);
       glScalef(0.05, 0.05, 0.05);
       glRotatef(90, 0.5, 0.5, 0);
@@ -210,9 +210,7 @@ void Nave::dibujar() {
         glPopMatrix();
       glPopMatrix();
     glPopMatrix();
-    
   }
-
 }
 
 

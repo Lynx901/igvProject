@@ -9,7 +9,7 @@
  */
 
 #include <iostream>
-#include "Objeto.h"
+#include "Camara.h"
 
 #ifndef Nave_h
 #define	Nave_h
@@ -27,15 +27,10 @@ public:
   virtual ~Nave();                                                                        // Destructor
   
   void dibujar();                                                                         // Dibuja la nave
-  //void establecerMovimiento(std::string nombre);                                          // Movimiento de la nave
-  
-  tVector3 getPosicion() { return posicion; };
-  void     setPosicion(tVector3 pos) { posicion = pos; }
   
 private:
-  std::string tipo;
-  tVector3    posicion;
-  bool        rotacion;
+  std::string tipo;                                                                       // Indica de qué tipo es la nave
+  tVector3    posicion;                                                                   // Posición de la nave
 };
 
 #endif	/* Nave_h */

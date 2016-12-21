@@ -1,3 +1,13 @@
+/**
+ * @file    igvInterfaz.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
+
 #include <cstdlib>
 #include <stdio.h>
 #include <iostream>
@@ -13,13 +23,11 @@ extern igvInterfaz interfaz;                                                    
                                                                                            * a las variables de la clase
                                                                                            */
 
-int const BOTON    = 11;
+int const BOTON = 11;
 
 bool fullScreen = false;
 int antiguoW;
 int antiguoH;
-
-/******************************* Metodos constructores **********************************************************************************/
 
 igvInterfaz::igvInterfaz () {
   modo                = IGV_VISUALIZAR;
@@ -30,8 +38,6 @@ igvInterfaz::igvInterfaz () {
 }
 
 igvInterfaz::~igvInterfaz () {}
-
-/******************************* Metodos publicos ***************************************************************************************/
 
 void igvInterfaz::configurarEntorno(int argc, char** argv,
                                     int ancho, int alto,
@@ -91,6 +97,7 @@ void Enables(void){
   
   glEnable(GL_DEPTH_TEST);                                                                // Activa el ocultamiento de caras ocultas
   glEnable(GL_LIGHTING);                                                                  // Activa la luz
+  glEnable(GL_LIGHT0);
   glEnable(GL_NORMALIZE);                                                                 // Normaliza para la luz
   glEnable(GL_TEXTURE_2D);                                                                // Activa las texturas
   
@@ -129,6 +136,10 @@ void igvInterfaz::setDisplay() {
   }
   
   if(interfaz.start) {
+    camara.posicionarCamara(25, 25, 1,                                                    // Posici—n de la c‡mara
+                            25, 25, 25,                                                   // Hacia d—nde mira
+                            0, 1, 0);                                                     // Vector arriba
+    
     GLfloat blanco[]={1.0, 1.0, 1.0, 1.0};
     glMaterialfv(GL_FRONT, GL_EMISSION, blanco);
     
@@ -197,39 +208,35 @@ void igvInterfaz::setDisplay() {
       
       glTexCoord2f(0, 1);
       glVertex3f(29, 30, 15);    //arriba izq
-      glEnd();
+    glEnd();
       
-      GLfloat verde[] = {0.0, 1.0, 0.0, 0.0};
-      glMaterialfv(GL_FRONT, GL_EMISSION, verde);
-      
-      glPushName(BOTON);
+    GLfloat verde[] = {0.0, 1.0, 0.0, 0.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, verde);
+    
+    glPushName(BOTON);
       glPushMatrix();
-      glTranslatef(25, 21, 15);
-      glScalef(2, 0.7, 0.1);
-      
-      glutSolidCube(1);
+        glTranslatef(25, 21, 15);
+        glScalef(2, 0.7, 0.1);
+        
+        glutSolidCube(1);
       glPopMatrix();
-      glPopName();
+    glPopName();
       
     if(interfaz.objetoSeleccionado == BOTON) {
       interfaz.contador = 10;
     }
   }
   
-  
   interfaz.escena.visualizar(camara, interfaz.start);                                     // Dibuja la escena
   
   
   if(interfaz.modo == IGV_SELECCIONAR)
     interfaz.endSeleccion(1024, impactos);                                                // Salir del modo selecci—n y procesar impactos
-
   else
     glutSwapBuffers();                                                                    // Refresca la ventana sin parpadeos
-  
 }
 
 void igvInterfaz::setReshape(int w, int h) {
-  
   glViewport(0, 0, static_cast<GLsizei>(w), static_cast<GLsizei>(h));                     // Dimensiona el viewport al nuevo ancho y alto
   
   interfaz.anchoVentana = w;                                                              // Guarda los valores nuevos de la ventana
@@ -245,7 +252,6 @@ void igvInterfaz::setReshape(int w, int h) {
 /**************************************************************************************/
 
 void igvInterfaz::setTeclas(unsigned char key, int x, int y) {
-  
     switch (key) {
       case 'W':
       case 'w':
@@ -412,8 +418,9 @@ void igvInterfaz::endSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos) {
   }else
     objetoSeleccionado = 0;
   
+
   escena.seleccion = objetoSeleccionado;                                                  // Se pasa el resultado a la escena
-  
+
   interfaz.modo = IGV_VISUALIZAR;                                                         // Pasamos al modo IGV_VISUALIZAR para terminar
   camara.modoSelect = false;
 }

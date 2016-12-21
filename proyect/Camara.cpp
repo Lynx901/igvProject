@@ -1,10 +1,12 @@
-//
-//  Camara.cpp
-//  proyect
-//
-//  Created by Daniel Moya on 30/11/16.
-//  Copyright © 2016 Daniel Moya. All rights reserved.
-//
+/**
+ * @file    Camara.cpp
+ * @brief   Archivo del proyecto: proyect
+ * @author  Daniel Moya Leiva
+ * @version 1.0
+ * @date    14/12/16
+ *
+ *   Copyright © 2016 Daniel Moya. All rights reserved.
+ */
 
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -25,10 +27,8 @@ void Camara::moverCamara(float velocidad) {
   mPos.x  = mPos.x  + vVector.x * velocidad;
   mView.x = mView.x + vVector.x * velocidad;
   
-  
   mPos.y  = mPos.y  + vVector.y * velocidad;
   mView.y = mView.y + vVector.y * velocidad;
-  
   
   mPos.z  = mPos.z  + vVector.z * velocidad;
   mView.z = mView.z + vVector.z * velocidad;
@@ -55,10 +55,9 @@ void Camara::posicionarCamara(float pos_x,   float pos_y,  float pos_z,
 }
 
 void Camara::establecerSeleccion(int ancho, int alto, int cX, int cY) {
-  modoSelect = true;
-  // ancho y alto de la ventana de selecciÛn
-  anchoSeleccion = ancho;
-  altoSeleccion = alto;
+  modoSelect      = true;
+  anchoSeleccion  = ancho;
+  altoSeleccion   = alto;
 };
 
 
