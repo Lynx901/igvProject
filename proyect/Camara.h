@@ -25,7 +25,9 @@ public:
   tVector3(float _x, float _y, float _z): x(_x), y(_y), z(_z) {}
   
   tVector3 operator+(tVector3 vVector)  { return tVector3(x + vVector.x, y + vVector.y, z + vVector.z); }
+  tVector3 operator+(float number)      { return tVector3(x + number,    y + number,    z + number); }
   tVector3 operator-(tVector3 vVector)  { return tVector3(x - vVector.x, y - vVector.y, z - vVector.z); }
+  tVector3 operator-(float number)      { return tVector3(x - number,    y - number,    z - number); }
   tVector3 operator=(tVector3 vVector)  { return tVector3(x = vVector.x, y = vVector.y, z = vVector.z); }
   tVector3 operator*(float number)      { return tVector3(x * number,    y * number,    z * number); }
   tVector3 operator/(float number)      { return tVector3(x / number,    y / number,    z / number); }

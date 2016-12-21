@@ -28,8 +28,7 @@
 
 Planeta::Planeta(std::string nombre, tVector3 posicion)
 :   nombre(nombre)
-  , posicion(posicion)
-  , explotado(false)
+, posicion(posicion)
 {
   
 };
@@ -41,298 +40,105 @@ Planeta::Planeta(const Planeta &orig) {
 
 Planeta::~Planeta() {};
 
-//Colores por si no cargaran las texturas
-GLfloat diez[]   = {0.1, 0.1, 0.1};
-GLfloat nueve[]  = {0.2, 0.2, 0.2};
-GLfloat ocho[]   = {0.3, 0.3, 0.3};
-GLfloat siete[]  = {0.4, 0.4, 0.4};
-GLfloat seis[]   = {0.5, 0.5, 0.5};
-GLfloat cinco[]  = {0.6, 0.6, 0.6};
-GLfloat cuatro[] = {0.7, 0.7, 0.7};
-GLfloat tres[]   = {0.8, 0.8, 0.8};
-GLfloat dos[]    = {0.9, 0.9, 0.9};
-GLfloat uno[]    = {1.0, 1.0, 1.0};
+
+GLfloat blanco[] = {0.2, 0.2, 0.2};                                                       //Color por si no cargaran las texturas
 GLfloat angle = 0;
 
 void Planeta::dibujar() {
-  angle += 0.1;
-  glPushMatrix();
-  
-    if(nombre == "sol" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,uno);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-      
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-          igvTextura textSol("/Users/dani/Desktop/texturas/sol.bmp");
-          textSol.aplicar();
-          gluSphere(qobj,6,50,50);
-          gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-
-      glPopMatrix();
-    }
+  if(explotado) {
+    return;
+  } else {
     
-    if(nombre == "mercurio" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,dos);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textMerc("/Users/dani/Desktop/texturas/mercurio.bmp");
+    angle += 0.1;
+    
+    glPushMatrix();
+      glMaterialfv(GL_FRONT, GL_EMISSION, blanco);
+      
+      glTranslatef(posicion.x, posicion.y, posicion.z);
+      glRotatef(angle, 0, 1, 0);
+      
+      GLuint id;
+      glGenTextures(1, &id);
+      glBindTexture(GL_TEXTURE_2D, id);
+      glEnable(GL_TEXTURE_2D);
+    
+      GLUquadric *qobj = gluNewQuadric();
+      gluQuadricTexture(qobj, GL_TRUE);
+      
+      if(nombre == "sol")             {
+        igvTextura textSol(       "/Users/dani/Desktop/texturas/sol.bmp");
+        textSol.aplicar();
+        gluSphere(qobj, 6,    50, 50);
+      }else if(nombre == "mercurio")  {
+        igvTextura textMerc(      "/Users/dani/Desktop/texturas/mercurio.bmp");
         textMerc.aplicar();
-        gluSphere(qobj,1,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      
-      glPopMatrix();
-    }
-  
-    if(nombre == "venus" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,tres);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textVenus("/Users/dani/Desktop/texturas/venus.bmp");
+        gluSphere(qobj, 1,    50, 50);
+      }else if(nombre == "venus")     {
+        igvTextura textVenus(     "/Users/dani/Desktop/texturas/venus.bmp");
         textVenus.aplicar();
-        gluSphere(qobj,1.5,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "tierra" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,cuatro);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textTierra("/Users/dani/Desktop/texturas/mapa2.bmp");
+        gluSphere(qobj, 1.5,  50, 50);
+      }else if(nombre == "tierra")    {
+        igvTextura textTierra(    "/Users/dani/Desktop/texturas/tierra.bmp");
         textTierra.aplicar();
-        gluSphere(qobj,2,50,50);
-        gluDeleteQuadric(qobj);
-      glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "marte" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,cinco);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textMarte("/Users/dani/Desktop/texturas/marte.bmp");
+        gluSphere(qobj, 2,    50, 50);
+      }else if(nombre == "marte")     {
+        igvTextura textMarte(     "/Users/dani/Desktop/texturas/marte.bmp");
         textMarte.aplicar();
-        gluSphere(qobj,1.5,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "jupiter" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,seis);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textJupiter("/Users/dani/Desktop/texturas/jupiter.bmp");
+        gluSphere(qobj, 1.5,  50, 50);
+      }else if(nombre == "jupiter")   {
+        igvTextura textJupiter(   "/Users/dani/Desktop/texturas/jupiter.bmp");
         textJupiter.aplicar();
-        gluSphere(qobj,4.5,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "saturno" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,siete);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textSaturno("/Users/dani/Desktop/texturas/saturno.bmp");
+        gluSphere(qobj, 4.5,  50, 50);
+      }else if(nombre == "saturno")   {
+        igvTextura textSaturno(   "/Users/dani/Desktop/texturas/saturno.bmp");
         textSaturno.aplicar();
-        gluSphere(qobj,4,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "urano" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,ocho);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textUrano("/Users/dani/Desktop/texturas/urano.bmp");
+        gluSphere(qobj, 4,    50, 50);
+      }else if(nombre == "urano")     {
+        igvTextura textUrano(     "/Users/dani/Desktop/texturas/urano.bmp");
         textUrano.aplicar();
-        gluSphere(qobj,3.5,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "neptuno" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,nueve);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textNeptuno("/Users/dani/Desktop/texturas/neptuno.bmp");
+        gluSphere(qobj, 3.5,  50, 50);
+      }else if(nombre == "neptuno")   {
+        igvTextura textNeptuno(   "/Users/dani/Desktop/texturas/neptuno.bmp");
         textNeptuno.aplicar();
-        gluSphere(qobj,3,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-    
-    if(nombre == "pluton" && !explotado) {
-      glMaterialfv(GL_FRONT,GL_EMISSION,diez);
-      glPushMatrix();
-        glTranslatef(posicion.x, posicion.y, posicion.z);
-        glRotatef(angle, 0, 1, 0);
-        GLuint id;
-        glGenTextures(1, &id);
-        GLUquadric *qobj = gluNewQuadric();
-        gluQuadricTexture(qobj,GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glEnable(GL_TEXTURE_2D);
-        igvTextura textPluton("/Users/dani/Desktop/texturas/pluton.bmp");
+        gluSphere(qobj, 3,    50, 50);
+      }else if(nombre == "pluton")    {
+        igvTextura textPluton(    "/Users/dani/Desktop/texturas/pluton.bmp");
         textPluton.aplicar();
-        gluSphere(qobj,0.5,50,50);
-        gluDeleteQuadric(qobj);
-        glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-    }
-  
-  glPopMatrix();
+        gluSphere(qobj, 0.5,  50, 50);
+      }
+    
+      gluDeleteQuadric(qobj);
+      glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+  }
 }
 
 void Planeta::explotar() {
-  
-  if(nombre == "sol") {
-    glMaterialfv(GL_FRONT,GL_EMISSION,uno);
-    glPushMatrix();
-    glutSolidTeapot(10);
-    
-    glPopMatrix();
-  }
-  
-  if(nombre == "mercurio") {
-    glMaterialfv(GL_FRONT,GL_EMISSION,dos);
-    glPushMatrix();
-    glutSolidTeapot(10);
-
-    
-    glPopMatrix();
-  }
-  
-  if(nombre == "venus" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,tres);
-    glPushMatrix();
-    glutSolidTeapot(10);
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "tierra" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,cuatro);
-    glPushMatrix();
-    glutSolidTeapot(10);
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "marte") {
-    glMaterialfv(GL_FRONT,GL_EMISSION,cinco);
-    glPushMatrix();
-    glutSolidTeapot(10);
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "jupiter" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,seis);
-    glPushMatrix();
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "saturno" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,siete);
-    glPushMatrix();
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "urano" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,ocho);
-    glPushMatrix();
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "neptuno" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,nueve);
-    glPushMatrix();
-
-    glPopMatrix();
-  }
-  
-  if(nombre == "pluton" && explotado) {
-    glMaterialfv(GL_FRONT,GL_EMISSION,diez);
-    glPushMatrix();
-
-    glPopMatrix();
-  }
-
+  glMaterialfv(GL_FRONT, GL_EMISSION, blanco);
+  glPushMatrix();
+    glTranslatef(posicion.x, posicion.y, posicion.z);
+    if(nombre == "sol") {
+      //TODO - Implementar explosión
+    }else if(nombre == "mercurio")  {
+      //TODO - Implementar explosión
+    }else if(nombre == "venus")     {
+      //TODO - Implementar explosión
+    }else if(nombre == "tierra")    {
+      //TODO - Implementar explosión
+    }else if(nombre == "marte")     {
+      //TODO - Implementar explosión
+    }else if(nombre == "jupiter")   {
+      //TODO - Implementar explosión
+    }else if(nombre == "saturno")   {
+      //TODO - Implementar explosión
+    }else if(nombre == "urano")     {
+      //TODO - Implementar explosión
+    }else if(nombre == "neptuno")   {
+      //TODO - Implementar explosión
+    }else if(nombre == "pluton")    {
+      //TODO - Implementar explosión
+    }
+  glPopMatrix();
 }
 
 

@@ -21,68 +21,18 @@
 
 void Camara::moverCamara(float velocidad) {
   tVector3 vVector = mView - mPos;
+  //TODO - Implementar colisión con el skybox para no salirse
+  mPos.x  = mPos.x  + vVector.x * velocidad;
+  mView.x = mView.x + vVector.x * velocidad;
   
-  if(mPos.x <= 0.5) {
-    mPos.x  = 0.6;
-    mView.x = mView.x;
-  } else {
-    mPos.x  = mPos.x  + vVector.x * velocidad;
-    mView.x = mView.x + vVector.x * velocidad;
-  }
   
-  if(mPos.y <= 0.5) {
-    mPos.y  = 0.6;
-    mView.y = mView.y;
-  } else {
-    mPos.y  = mPos.y  + vVector.y * velocidad;
-    mView.y = mView.y + vVector.y * velocidad;
-  }
+  mPos.y  = mPos.y  + vVector.y * velocidad;
+  mView.y = mView.y + vVector.y * velocidad;
   
-  if(mPos.z <= 0.5) {
-    mPos.z  = 0.6;
-    mView.z = mView.z;
-  } else {
-    mPos.z  = mPos.z  + vVector.z * velocidad;
-    mView.z = mView.z + vVector.z * velocidad;
-  }
   
-  /**************************************************************************************/
-  /*                                                                                    */
-  /*                         Control de choque                                          */
-  /*                                                                                    */
-  /**************************************************************************************/
-  /*
-  if(tVector3::distancia(pSol, camara.mPos) < 3) {
-    camara.mPos =
-  }
-  if(tVector3::distancia(pMer, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pVen, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pTie, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pMar, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pJup, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pSat, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pUra, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pNep, camara.mPos) < 3) {
-    
-  }
-  if(tVector3::distancia(pPlu, camara.mPos) < 3) {
-    
-  }
-  */
+  mPos.z  = mPos.z  + vVector.z * velocidad;
+  mView.z = mView.z + vVector.z * velocidad;
+  
 }
 
 void Camara::rotarVista(float velocidad) {
@@ -96,8 +46,8 @@ void Camara::rotarVista(float velocidad) {
 }
 
 void Camara::posicionarCamara(float pos_x,   float pos_y,  float pos_z,
-                      float view_x,  float view_y, float view_z,
-                      float up_x,    float up_y,   float up_z){
+                              float view_x,  float view_y, float view_z,
+                              float up_x,    float up_y,   float up_z){
   
   mPos	= tVector3(pos_x,  pos_y,  pos_z );
   mView	= tVector3(view_x, view_y, view_z);

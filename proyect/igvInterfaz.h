@@ -26,14 +26,14 @@ protected:
   modoInterfaz modo;
   bool pulsado;
   int objetoSeleccionado;
-  
+  bool start;
   
 public:
   float cursorX;
   float cursorY;
   int anchoVentana;                                                                       // Ancho inicial de la ventana de visualizaci—n
   int altoVentana;                                                                        // Alto inicial de la ventana de visualizaci—n
-  
+  int contador;
   
   igvInterfaz();                                                                          // Constructor
   ~igvInterfaz();                                                                         // Destructor

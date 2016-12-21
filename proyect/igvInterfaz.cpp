@@ -12,6 +12,9 @@ extern igvInterfaz interfaz;                                                    
                                                                                            * requiere este objeto para acceder desde ellos 
                                                                                            * a las variables de la clase
                                                                                            */
+
+int const BOTON    = 11;
+
 bool fullScreen = false;
 int antiguoW;
 int antiguoH;
@@ -22,6 +25,8 @@ igvInterfaz::igvInterfaz () {
   modo                = IGV_VISUALIZAR;
   objetoSeleccionado  = -1;
   pulsado             = false;
+  start               = true;
+  contador            = 10;
 }
 
 igvInterfaz::~igvInterfaz () {}
@@ -42,7 +47,7 @@ void igvInterfaz::configurarEntorno(int argc, char** argv,
   glutInitWindowPosition(_pos_X,_pos_Y);                                                  // Inicializa la posici—n de la ventana
   glutCreateWindow(_titulo.c_str());                                                      // Inicializa el nombre de la ventana
   
-  camara.posicionarCamara(40, 40, 1,                                                      // Posici—n de la c‡mara
+  camara.posicionarCamara(25, 25, 1,                                                      // Posici—n de la c‡mara
                           25, 25, 25,                                                     // Hacia d—nde mira
                           0, 1, 0);                                                       // Vector arriba
 }
@@ -66,10 +71,10 @@ void Camera() {
                   viewport);
   }
   
-  gluPerspective(90.0,
+  gluPerspective(45,
                  static_cast<GLfloat>(interfaz.anchoVentana) / static_cast<GLfloat>(interfaz.altoVentana),
                  0.1,
-                 100.0);
+                 200.0);
   
   glMatrixMode (GL_MODELVIEW);                                                            // Carga la matriz de modelado
   glLoadIdentity();
@@ -86,7 +91,6 @@ void Enables(void){
   
   glEnable(GL_DEPTH_TEST);                                                                // Activa el ocultamiento de caras ocultas
   glEnable(GL_LIGHTING);                                                                  // Activa la luz
-  //glEnable(GL_LIGHT0);
   glEnable(GL_NORMALIZE);                                                                 // Normaliza para la luz
   glEnable(GL_TEXTURE_2D);                                                                // Activa las texturas
   
@@ -109,11 +113,116 @@ void igvInterfaz::setDisplay() {
   
   Camera();                                                                               // Llama al set-up de la c‡mara
   Enables();                                                                              // Hace los glEnables correspondientes
-  interfaz.escena.visualizar(camara);                                                     // Dibuja la escena
+  
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Instrucciones                                              */
+  /*                                                                                    */
+  /**************************************************************************************/
+  if((interfaz.objetoSeleccionado >= 1 && interfaz.objetoSeleccionado <= 10) &&
+     interfaz.contador > 0){
+    
+    interfaz.contador--;
+    interfaz.objetoSeleccionado = -1;
+    std::cout << "Contador: " << interfaz.contador << std::endl;
+    
+  }
+  
+  if(interfaz.start) {
+    GLfloat blanco[]={1.0, 1.0, 1.0, 1.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, blanco);
+    
+    igvTextura instrucciones("/Users/dani/Desktop/texturas/instrucciones.bmp");
+    instrucciones.aplicar();
+    
+    glNormal3f(0, 1, 0);
+    glBegin(GL_QUADS);
+      glTexCoord2f(0, 0);
+      glVertex3f(29, 20, 15);    //abajo izq
+      
+      glTexCoord2f(1, 0);
+      glVertex3f(21.5, 20, 15);  //abajo der
+      
+      glTexCoord2f(1, 1);
+      glVertex3f(21.5, 30, 15);  //arriba der
+      
+      glTexCoord2f(0, 1);
+      glVertex3f(29, 30, 15);    //arriba izq
+    glEnd();
+    
+    GLfloat verde[] = {0.0, 1.0, 0.0, 0.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, verde);
+    
+    glPushName(BOTON);
+      glPushMatrix();
+        glTranslatef(25, 21, 15);
+        glScalef(2, 0.7, 0.1);
+
+        glutSolidCube(1);
+      glPopMatrix();
+    glPopName();
+    
+    if(interfaz.objetoSeleccionado == BOTON)
+      interfaz.start = false;
+  }
+  
+  /**************************************************************************************/
+  /*                                                                                    */
+  /*                         Fin                                                        */
+  /*                                                                                    */
+  /**************************************************************************************/
+  
+  
+  if(interfaz.contador == 0) {
+    camara.posicionarCamara(25, 25, 1,                                                      // Posici—n de la c‡mara
+                            25, 25, 25,                                                     // Hacia d—nde mira
+                            0, 1, 0);                                                       // Vector arriba
+ 
+    GLfloat blanco[]={1.0, 1.0, 1.0, 1.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, blanco);
+    
+    igvTextura instrucciones("/Users/dani/Desktop/texturas/fin.bmp");
+    instrucciones.aplicar();
+    
+    glNormal3f(0, 1, 0);
+    glBegin(GL_QUADS);
+      glTexCoord2f(0, 0);
+      glVertex3f(29, 20, 15);    //abajo izq
+      
+      glTexCoord2f(1, 0);
+      glVertex3f(21.5, 20, 15);  //abajo der
+      
+      glTexCoord2f(1, 1);
+      glVertex3f(21.5, 30, 15);  //arriba der
+      
+      glTexCoord2f(0, 1);
+      glVertex3f(29, 30, 15);    //arriba izq
+      glEnd();
+      
+      GLfloat verde[] = {0.0, 1.0, 0.0, 0.0};
+      glMaterialfv(GL_FRONT, GL_EMISSION, verde);
+      
+      glPushName(BOTON);
+      glPushMatrix();
+      glTranslatef(25, 21, 15);
+      glScalef(2, 0.7, 0.1);
+      
+      glutSolidCube(1);
+      glPopMatrix();
+      glPopName();
+      
+    if(interfaz.objetoSeleccionado == BOTON) {
+      interfaz.contador = 10;
+    }
+  }
+  
+  
+  interfaz.escena.visualizar(camara, interfaz.start);                                     // Dibuja la escena
   
   
   if(interfaz.modo == IGV_SELECCIONAR)
     interfaz.endSeleccion(1024, impactos);                                                // Salir del modo selecci—n y procesar impactos
+
   else
     glutSwapBuffers();                                                                    // Refresca la ventana sin parpadeos
   
@@ -136,59 +245,67 @@ void igvInterfaz::setReshape(int w, int h) {
 /**************************************************************************************/
 
 void igvInterfaz::setTeclas(unsigned char key, int x, int y) {
-  switch (key) {
-    case 'W':
-    case 'w':
-      camara.moverCamara(0.03);                                                           // Mueve la c‡mara hacia delante
-      break;
-    case 'S':
-    case 's':
-      camara.moverCamara(-0.03);                                                          // Mueve la c‡mara hacia detr‡s
-      break;
-    case 'D':
-    case 'd':
-      camara.rotarVista(0.03);                                                            // Mueve la c‡mara hacia la derecha
-      break;
-    case 'A':
-    case 'a':
-      camara.rotarVista(-0.03);                                                           // Mueve la c‡mara hacia la izquierda
-      break;
-    case 'F':
-    case 'f':                                                                             // Pone la app en pantalla completa
-      if(!fullScreen){
-        antiguoH = interfaz.altoVentana;
-        antiguoW = interfaz.anchoVentana;
-        glutFullScreen();
-        fullScreen = true;
-      } else {
-        glutReshapeWindow(antiguoH, antiguoW);
-        fullScreen = false;
-      }
-      break;
-    case 'E':
-    case 'e':
-      interfaz.escena.setEjes(interfaz.escena.getEjes() ? false : true);                  // Activa/Desactiva los ejes
-      break;
-    case 27:
-      exit(1);                                                                            // Tecla de escape para salir
-      break;
+  
+    switch (key) {
+      case 'W':
+      case 'w':
+        if(!interfaz.start)
+        camara.moverCamara(0.03);                                                         // Mueve la c‡mara hacia delante
+        break;
+      case 'S':
+      case 's':
+        if(!interfaz.start)
+        camara.moverCamara(-0.03);                                                        // Mueve la c‡mara hacia detr‡s
+        break;
+      case 'D':
+      case 'd':
+        if(!interfaz.start)
+        camara.rotarVista(0.03);                                                          // Mueve la c‡mara hacia la derecha
+        break;
+      case 'A':
+      case 'a':
+        if(!interfaz.start)
+          
+        camara.rotarVista(-0.03);                                                         // Mueve la c‡mara hacia la izquierda
+        break;
+      case 'F':
+      case 'f':                                                                           // Pone la app en pantalla completa
+        if(!fullScreen){
+          antiguoH = interfaz.altoVentana;
+          antiguoW = interfaz.anchoVentana;
+          glutFullScreen();
+          fullScreen = true;
+        } else {
+          glutReshapeWindow(antiguoH, antiguoW);
+          fullScreen = false;
+        }
+        break;
+      case 'E':
+      case 'e':
+        interfaz.escena.setEjes(interfaz.escena.getEjes() ? false : true);                // Activa/Desactiva los ejes
+        break;
+      case 27:
+        exit(1);                                                                          // Tecla de escape para salir
+        break;
   }
 }
 
 void igvInterfaz::setTeclasEspeciales(int key, int x, int y) {
-  switch (key) {
-    case GLUT_KEY_UP:
-      camara.moverCamara(0.03);                                                           // Mueve la c‡mara hacia delante
-      break;
-    case GLUT_KEY_DOWN:
-      camara.moverCamara(-0.03);                                                          // Mueve la c‡mara hacia detr‡s
-      break;
-    case GLUT_KEY_RIGHT:
-      camara.rotarVista(0.03);                                                            // Mueve la c‡mara hacia la derecha
-      break;
-    case GLUT_KEY_LEFT:
-      camara.rotarVista(-0.03);                                                           // Mueve la c‡mara hacia la izquierda
-      break;
+  if(!interfaz.start) {
+    switch (key) {
+      case GLUT_KEY_UP:
+        camara.moverCamara(0.03);                                                         // Mueve la c‡mara hacia delante
+        break;
+      case GLUT_KEY_DOWN:
+        camara.moverCamara(-0.03);                                                        // Mueve la c‡mara hacia detr‡s
+        break;
+      case GLUT_KEY_RIGHT:
+        camara.rotarVista(0.03);                                                          // Mueve la c‡mara hacia la derecha
+        break;
+      case GLUT_KEY_LEFT:
+        camara.rotarVista(-0.03);                                                         // Mueve la c‡mara hacia la izquierda
+        break;
+    }
   }
 }
 
@@ -206,21 +323,15 @@ void igvInterfaz::movimientoRaton(int x, int y) {
   float midX = interfaz.altoVentana/2;                                                    // Guarda los centros de la pantalla
   float midY = interfaz.anchoVentana/2;
   
-  //std::cout << "\nX: " << x << " Y: " << y;                                             // Muestra la posici—n del rat—n
-  
   if(!fullScreen){
     if(x < 0 || x > interfaz.altoVentana) return;                                         // Evita que se actualice fuera de la ventana
     if(y < 0 || y > interfaz.anchoVentana) return;
   }
   
-  //glutWarpPointer(midX, midY);
-  
   angY = static_cast<GLfloat>( (midX - x) ) / 10000;                                      // Movimiento del rat—n y su velocidad
   angZ = static_cast<GLfloat>( (midY - y) ) / 500;
   
-  //std::cout << "\n\t ang Y: " << angY << " ang >: " <<  angZ;
-  
-  camara.mView.y += angZ * 2;
+  camara.mView.y += angZ;
   
   if((camara.mView.y - camara.mPos.y) >  80)
     camara.mView.y = camara.mPos.y + 80;                                                  // Limita el movimiento en el eje Y
@@ -267,7 +378,7 @@ void igvInterfaz::initSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos) {
 
 int procesar(int numImpactos, GLuint *impactos) {
   /*
-   * Esta función debe devolver el c—digo del objeto seleccionado, que no tiene por quŽ
+   * Esta funci—n debe devolver el c—digo del objeto seleccionado, que no tiene por quŽ
    * coincidir con el nombre asignado con la pila de nombres. Si se han utilizado nombres
    * jer‡rquicos hay que tener en cuenta que esta funci—n s—lo devuevle un œnico c—digo
    *
@@ -296,9 +407,9 @@ int procesar(int numImpactos, GLuint *impactos) {
 void igvInterfaz::endSeleccion(int TAMANO_LISTA_IMPACTOS, GLuint *impactos) {
   int numImpactos = glRenderMode(GL_RENDER);                                              // Vuelve a "GL_RENDER" y obtiene n¼ impactos
   
-  if(numImpactos > 0)
+  if(numImpactos > 0) {
     objetoSeleccionado = procesar(numImpactos, impactos);                                 // Si hay impactos, se pasa a procesarlos
-  else
+  }else
     objetoSeleccionado = 0;
   
   escena.seleccion = objetoSeleccionado;                                                  // Se pasa el resultado a la escena

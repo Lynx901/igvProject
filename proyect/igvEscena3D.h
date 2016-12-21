@@ -31,7 +31,7 @@ public:
   igvEscena3D();                                                                          // Constructor
   ~igvEscena3D();                                                                         // Destructor
   
-  void visualizar(Camara pos);                                                          // MŽtodo donde se dibuja la escena
+  void visualizar(Camara pos, bool start);                                                // MŽtodo donde se dibuja la escena
   
   void setEjes(bool _ejes)   { ejes = _ejes; } ;                                          // Pinta los ejes
   bool getEjes()             { return ejes; } ;                                           // Devuelve si los ejes est‡n pintados o no

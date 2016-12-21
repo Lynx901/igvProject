@@ -10,223 +10,38 @@
 // Metodos constructores
 
 igvEscena3D::igvEscena3D () {
-	ejes = false;
+  ejes = false;
 }
 
 igvEscena3D::~igvEscena3D() {
 }
 
 
-// Metodos publicos 
+// Metodos publicos
 
 void pintarEjes(void) {
-  GLfloat rojo[]={1,0,0,1.0};
-  GLfloat verde[]={0,1,0,1.0};
-  GLfloat azul[]={0,0,1,1.0};
-
+  GLfloat rojo[]  ={1, 0, 0, 1.0};
+  GLfloat verde[] ={0, 1, 0, 1.0};
+  GLfloat azul[]  ={0, 0, 1, 1.0};
+  
   glMaterialfv(GL_FRONT,GL_EMISSION,rojo);
-	glBegin(GL_LINES);
+  glBegin(GL_LINES);
 		glVertex3f(1000,0,0);
 		glVertex3f(-1000,0,0);
-	glEnd();
-
+  glEnd();
+  
   glMaterialfv(GL_FRONT,GL_EMISSION,verde);
-	glBegin(GL_LINES);
+  glBegin(GL_LINES);
 		glVertex3f(0,1000,0);
 		glVertex3f(0,-1000,0);
-	glEnd();
-
+  glEnd();
+  
   glMaterialfv(GL_FRONT,GL_EMISSION,azul);
-	glBegin(GL_LINES);
+  glBegin(GL_LINES);
 		glVertex3f(0,0,1000);
 		glVertex3f(0,0,-1000);
-	glEnd();
+  glEnd();
 }
-
-/*
-void pintarQuadPlanoXZbot(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-  
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-        glTexCoord2f(0, 1);
-        glVertex3f(i, 0.0, j);
-        
-        glTexCoord2f(0, 0);
-        glVertex3f(i, 0.0, j + divisionZ);
-        
-        glTexCoord2f(1, 1);
-        glVertex3f(i + divisionX, 0.0, j + divisionZ);
-        
-        glTexCoord2f(1, 0);
-        glVertex3f(i + divisionX, 0.0, j);
-      
-      glEnd();
-    }
-  }
-}
-
-void pintarQuadPlanoYZleft(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-  
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-      glTexCoord2f(0, 1);
-      glVertex3f(0.0, i, j);
-      
-      glTexCoord2f(0, 0);
-      glVertex3f(0.0, i, j + divisionZ);
-      
-      glTexCoord2f(1, 1);
-      glVertex3f(0.0, i + divisionX, j + divisionZ);
-      
-      glTexCoord2f(1, 0);
-      glVertex3f(0.0, i + divisionX, j);
-      
-      glEnd();
-    }
-  }
-}
-
-void pintarQuadPlanoXYback(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-  
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-      glTexCoord2f(0, 1);
-      glVertex3f(i, j, 0.0);
-      
-      glTexCoord2f(0, 0);
-      glVertex3f(i, j + divisionZ, 0.0);
-      
-      glTexCoord2f(1, 1);
-      glVertex3f(i + divisionX, j + divisionZ, 0.0);
-      
-      glTexCoord2f(1, 0);
-      glVertex3f(i + divisionX, j, 0.0);
-      
-      glEnd();
-    }
-  }
-}
-
-void pintarQuadPlanoXZtop(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-  
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-      glTexCoord2f(0, 1);
-      glVertex3f(i, fin, j);
-      
-      glTexCoord2f(0, 0);
-      glVertex3f(i, fin, j + divisionZ);
-      
-      glTexCoord2f(1, 1);
-      glVertex3f(i + divisionX, fin, j + divisionZ);
-      
-      glTexCoord2f(1, 0);
-      glVertex3f(i + divisionX, fin, j);
-      
-      glEnd();
-    }
-  }
-}
-
-void pintarQuadPlanoXYfront(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-      glTexCoord2f(0, 1);
-      glVertex3f(i, j, fin);
-      
-      glTexCoord2f(0, 0);
-      glVertex3f(i, j + divisionZ, fin);
-      
-      glTexCoord2f(1, 1);
-      glVertex3f(i + divisionX, j + divisionZ, fin);
-      
-      glTexCoord2f(1, 0);
-      glVertex3f(i + divisionX, j, fin);
-      
-      glEnd();
-    }
-  }
-}
-
-void pintarQuadPlanoYZright(float div_x, float div_z, float inicio, float fin) {
-  float tam_x = fin;
-  float tam_z = fin;
-  
-  float divisionX = tam_x / div_x;
-  float divisionZ = tam_z / div_z;
-  
-  for (float i = 0.0; i < tam_x; i += divisionX){
-    for (float j = 0.0; j < tam_z; j += divisionZ){
-      glNormal3f(0, 1, 0);
-      glBegin(GL_QUADS);
-      
-      glTexCoord2f(0, 1);
-      glVertex3f(fin, i, j);
-      
-      glTexCoord2f(0, 0);
-      glVertex3f(fin, i, j + divisionZ);
-      
-      glTexCoord2f(1, 1);
-      glVertex3f(fin, i + divisionX, j + divisionZ);
-      
-      glTexCoord2f(1, 0);
-      glVertex3f(fin, i + divisionX, j);
-      
-      glEnd();
-    }
-  }
-}
-*/
-
-tVector3 random1(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random2(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random3(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random4(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random5(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random6(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random7(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
-tVector3 random8(rand() % 49 + 1, rand() % 49 + 1, rand() % 49 + 1);
 
 int const SOL       = 1;
 int const MERCURIO  = 2;
@@ -239,38 +54,15 @@ int const URANO     = 8;
 int const NEPTUNO   = 9;
 int const PLUTON    = 10;
 
+int randomNumber() {
+  return rand()%69 + 1;
+}
 
-
-void igvEscena3D::visualizar(Camara camara) {
-
-  /**************************************************************************************/
-  /*                                                                                    */
-  /*                         Instrucciones                                              */
-  /*                                                                                    */
-  /**************************************************************************************/
+void igvEscena3D::visualizar(Camara camara, bool start) {
+  glPushMatrix();
   
-  GLfloat blanco[]={1.0, 1.0, 1.0, 1.0};
-  glMaterialfv(GL_FRONT,GL_EMISSION, blanco);
-  
-  igvTextura instrucciones("/Users/dani/Desktop/texturas/instrucciones.bmp");
-  instrucciones.aplicar();
-  
-  glNormal3f(0, 1, 0);
-  glBegin(GL_QUADS);
-  
-    glTexCoord2f(0, 0);
-    glVertex3f(25, 25, 25);
-    
-    glTexCoord2f(1, 0);
-    glVertex3f(35, 25, 25);
-    
-    glTexCoord2f(1, 1);
-    glVertex3f(35, 35, 25);
-    
-    glTexCoord2f(0, 1);
-    glVertex3f(25, 35, 25);
-  
-  glEnd();
+  if (ejes)
+    pintarEjes();
   
   /**************************************************************************************/
   /*                                                                                    */
@@ -278,24 +70,20 @@ void igvEscena3D::visualizar(Camara camara) {
   /*                                                                                    */
   /**************************************************************************************/
   
-  posFoco1    = posFoco2    = camara.mPos;
-  posFoco1.x  = camara.mPos.x + 3;
-  posFoco2.x  = camara.mPos.x - 3;
-  
-	glPushMatrix();
-	  if (ejes)
-      pintarEjes();
+  posFoco1    = posFoco2    = camara.mPos;                                                // Crea los focos en la posici—n de la c‡mara
+  posFoco1.x  = camara.mPos.x + 3;                                                        // Pone el foco 1 un poco a la derecha
+  posFoco2.x  = camara.mPos.x - 3;                                                        // Pone el foco 2 un poco a la izquierda
   
   igvColor cAmbF(0.0, 0.0, 0.0, 1.0);
   igvColor cDifF(1.0, 1.0, 1.0, 1.0);
   igvColor cEspF(1.0, 1.0, 1.0, 1.0);
   
-  igvFuenteLuz foco1(GL_LIGHT1, posFoco1, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 30, 10);
+  igvFuenteLuz foco1(GL_LIGHT1, posFoco1, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 15, 20);
   foco1.aplicar();
-
-  igvFuenteLuz foco2(GL_LIGHT2, posFoco2, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 30, 10);
+  
+  igvFuenteLuz foco2(GL_LIGHT2, posFoco2, cAmbF, cDifF, cEspF, 1.0, 0.0, 0.0, dirFoco, 15, 20);
   foco2.aplicar();
-
+  
   
   /**************************************************************************************/
   /*                                                                                    */
@@ -304,21 +92,21 @@ void igvEscena3D::visualizar(Camara camara) {
   /**************************************************************************************/
   
   GLfloat azul[]={0,0,1,1.0};
-    glMaterialfv(GL_FRONT,GL_EMISSION, azul);
-    glPushMatrix();
-      glTranslatef(25, 25, 25);
-      GLuint id;
-      glGenTextures(1, &id);
-      GLUquadric *qobj = gluNewQuadric();
-      gluQuadricTexture(qobj,GL_TRUE);
-      glBindTexture(GL_TEXTURE_2D, id);
-      glEnable(GL_TEXTURE_2D);
-      igvTextura textSB("/Users/dani/Desktop/texturas/skybox/sbSphere.bmp");
-      textSB.aplicar();
-      gluSphere(qobj,50,50,50);
-      gluDeleteQuadric(qobj);
-      glDisable(GL_TEXTURE_2D);
-    glPopMatrix();
+  glMaterialfv(GL_FRONT,GL_EMISSION, azul);
+  glPushMatrix();
+  glTranslatef(25, 25, 25);
+  GLuint id;
+  glGenTextures(1, &id);
+  GLUquadric *qobj = gluNewQuadric();
+  gluQuadricTexture(qobj,GL_TRUE);
+  glBindTexture(GL_TEXTURE_2D, id);
+  glEnable(GL_TEXTURE_2D);
+  igvTextura textSB("/Users/dani/Desktop/texturas/sbSphere.bmp");
+  textSB.aplicar();
+  gluSphere(qobj,100,50,50);
+  gluDeleteQuadric(qobj);
+  glDisable(GL_TEXTURE_2D);
+  glPopMatrix();
   
   
   /**************************************************************************************/
@@ -327,112 +115,121 @@ void igvEscena3D::visualizar(Camara camara) {
   /*                                                                                    */
   /**************************************************************************************/
   
-  tVector3 pSol(0, 0, 0),    pMer(5, 5, 5),    pVen(10, 10, 10), pTie(15, 15, 15),
-             pMar(20, 20, 20), pJup(25, 25, 25), pSat(30, 30, 30), pUra(35, 35, 35),
-             pNep(40, 40, 40), pPlu(45, 45, 45);
+  tVector3 pSol(1, 1, 1), pMer(5, 25, 5),   pVen(10, 10, 10), pTie(15, 15, 15),      // Posiciones de los planetas
+  pMar(20, 20, 20), pJup(25, 25, 25), pSat(30, 30, 30), pUra(35, 35, 35),
+  pNep(40, 40, 40), pPlu(45, 45, 45);
   
   
-    Planeta sol(      "sol",      pSol);
-    Planeta mercurio( "mercurio", pMer);
-    Planeta venus(    "venus",    pVen);
-    Planeta tierra(   "tierra",   pTie);
-    Planeta marte(    "marte",    pMar);
-    Planeta jupiter(  "jupiter",  pJup);
-    Planeta saturno(  "saturno",  pSat);
-    Planeta urano(    "urano",    pUra);
-    Planeta neptuno(  "neptuno",  pNep);
-    Planeta pluton(   "pluton",   pPlu);
+  Planeta sol(      "sol",      pSol);                                                  // Creaci—n de los planetas
+  if(seleccion != 1 && !sol.explotado) {
+    sol.explotado = false;
+    glPushName(SOL);                                                                      // Dibujo y control del espacio de nombres
+    sol.dibujar();
+    glPopName();
+  } else if(!start) {
+    sol.explotar();
+    sol.explotado = true;
+  }
   
-    glPushName(SOL);
-      sol.dibujar();
+  Planeta mercurio( "mercurio", pMer);
+  if(seleccion != 2 && !mercurio.explotado) {
+    mercurio.explotado = false;
+    glPushName(MERCURIO);                                                                      // Dibujo y control del espacio de nombres
+    mercurio.dibujar();
     glPopName();
+  } else if(!start) {
+    mercurio.explotar();
+    mercurio.explotado = true;
+  }
   
-    glPushName(MERCURIO);
-      mercurio.dibujar();
+  Planeta venus(    "venus",    pVen);
+  if(seleccion != 3 && !venus.explotado) {
+    venus.explotado = false;
+    glPushName(VENUS);                                                                      // Dibujo y control del espacio de nombres
+    venus.dibujar();
     glPopName();
-    
-    glPushName(VENUS);
-      venus.dibujar();
-    glPopName();
-
-    glPushName(TIERRA);
-      tierra.dibujar();
-    glPopName();
-    
-    glPushName(MARTE);
-      marte.dibujar();
-    glPopName();
-    
-    glPushName(JUPITER);
-      jupiter.dibujar();
-    glPopName();
-    
-    glPushName(SATURNO);
-      saturno.dibujar();
-    glPopName();
-    
-    glPushName(URANO);
-      urano.dibujar();
-    glPopName();
-    
-    glPushName(NEPTUNO);
-      neptuno.dibujar();
-    glPopName();
-    
-    glPushName(PLUTON);
-      pluton.dibujar();
-    glPopName();
-
+  } else if(!start) {
+    venus.explotar();
+    venus.explotado = true;
+  }
   
+  Planeta tierra(   "tierra",   pTie);
+  if(seleccion != 4 && !tierra.explotado) {
+    tierra.explotado = false;
+    glPushName(TIERRA);                                                                      // Dibujo y control del espacio de nombres
+    tierra.dibujar();
+    glPopName();
+  } else if(!start) {
+    tierra.explotar();
+    tierra.explotado = true;
+  }
   
-  /*std::cout << "\t\t" << tVector3::distancia(pSol, camara) << std::endl;
-  std::cout << "\tYo "   << camara.x << " - " << camara.y << " - "  << camara.z << std::endl;
-  std::cout << "\tSol "   << pSol.x << " - " << pSol.y << " - "  << pSol.z << std::endl;
-   */
+  Planeta marte(    "marte",    pMar);
+  if(seleccion != 5 && !marte.explotado) {
+    marte.explotado = false;
+    glPushName(MARTE);                                                                      // Dibujo y control del espacio de nombres
+    marte.dibujar();
+    glPopName();
+  } else if(!start) {
+    marte.explotar();
+    marte.explotado = true;
+  }
   
-  /**************************************************************************************/
-  /*                                                                                    */
-  /*                         Control de impactos                                        */
-  /*                                                                                    */
-  /**************************************************************************************/
+  Planeta jupiter(  "jupiter",  pJup);
+  if(seleccion != 6 && !jupiter.explotado) {
+    jupiter.explotado = false;
+    glPushName(JUPITER);                                                                      // Dibujo y control del espacio de nombres
+    jupiter.dibujar();
+    glPopName();
+  } else if(!start) {
+    jupiter.explotar();
+    jupiter.explotado = true;
+  }
   
-    switch (seleccion) {
-      case 1: // Sol
-        sol.explotar();
-        break;
-      case 2: // Mercurio
-        mercurio.explotar();
-        break;
-      case 3: // Venus
-        venus.explotar();
-        break;
-      case 4: // Tierra
-        tierra.explotar();
-        break;
-      case 5: // Marte
-        marte.explotar();
-        break;
-      case 6: // Jupiter
-        jupiter.explotar();
-        break;
-      case 7: // Saturno
-        saturno.explotar();
-        break;
-      case 8: // Urano
-        urano.explotar();
-        break;
-      case 9: // Neptuno
-        neptuno.explotar();
-        break;
-      case 10: // Pluton
-        pluton.explotar();
-        break;
-        
-    }
-    
-    if(tVector3::distancia(pSol, camara.mPos) < 3) {
-      
-    }
+  Planeta saturno(  "saturno",  pSat);
+  if(seleccion != 7 && !saturno.explotado) {
+    saturno.explotado = false;
+    glPushName(SATURNO);                                                                      // Dibujo y control del espacio de nombres
+    saturno.dibujar();
+    glPopName();
+  } else if(!start) {
+    saturno.explotar();
+    saturno.explotado = true;
+  }
+  
+  Planeta urano(    "urano",    pUra);
+  if(seleccion != 8 && !urano.explotado) {
+    urano.explotado = false;
+    glPushName(URANO);                                                                      // Dibujo y control del espacio de nombres
+    urano.dibujar();
+    glPopName();
+  } else if(!start) {
+    urano.explotar();
+    urano.explotado = true;
+  }
+  
+  Planeta neptuno(  "neptuno",  pNep);
+  if(seleccion != 9 && !neptuno.explotado) {
+    neptuno.explotado = false;
+    glPushName(NEPTUNO);                                                                      // Dibujo y control del espacio de nombres
+    neptuno.dibujar();
+    glPopName();
+  } else if(!start) {
+    neptuno.explotar();
+    neptuno.explotado = true;
+  }
+  
+  Planeta pluton(   "pluton",   pPlu);
+  if(seleccion != 10 && !pluton.explotado) {
+    pluton.explotado = false;
+    glPushName(PLUTON);                                                                      // Dibujo y control del espacio de nombres
+    pluton.dibujar();
+    glPopName();
+  } else if(!start) {
+    pluton.explotar();
+    pluton.explotado = true;
+  }
+  
   
   /**************************************************************************************/
   /*                                                                                    */
@@ -440,26 +237,18 @@ void igvEscena3D::visualizar(Camara camara) {
   /*                                                                                    */
   /**************************************************************************************/
   
-  Nave nave1("satelite", tVector3(5, 10, 5));
-    Nave nave2("satelite", tVector3(random2.x, random2.y, random2.z));
-    Nave nave3("satelite", tVector3(random3.x, random3.y, random3.z));
-    Nave nave4("satelite", tVector3(random4.x, random4.y, random4.z));
+  std::vector<Nave> satelites;
+  for (int i = 0; i < 5; i++) {
+    satelites.push_back(Nave("satelite", tVector3(randomNumber(), randomNumber(), randomNumber())));
+    satelites.at(i).dibujar();
+  }
   
-    Nave nave5("cohete", tVector3(random5.x, random5.y, random5.z));
-    Nave nave6("cohete", tVector3(random6.x, random6.y, random6.z));
-    Nave nave7("cohete", tVector3(random7.x, random7.y, random7.z));
-    Nave nave8("cohete", tVector3(random8.x, random8.y, random8.z));
-  
-    nave1.dibujar();
-    nave2.dibujar();
-    nave3.dibujar();
-    nave4.dibujar();
-  
-    nave5.dibujar();
-    nave6.dibujar();
-    nave7.dibujar();
-    nave8.dibujar();
-  
+  std::vector<Nave> cohetes;
+  for (int i = 0; i < 5; i++) {
+    cohetes.push_back(Nave("cohete", tVector3(randomNumber(), randomNumber(), randomNumber())));
+    cohetes.at(i).dibujar();
+  }
+
   glPopMatrix (); // restaura la matriz de modelado
 }
 

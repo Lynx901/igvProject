@@ -12,8 +12,8 @@ int main (int argc, char** argv) {
   
   // Inicializamos la ventana de visualizaci—n
   interfaz.configurarEntorno(argc,argv,         // Par‡metros del main
-                             1000, 1000,          // Tama–o de la ventana
-                             200, 500,          // Posici—n de la ventana
+                             700, 700,        // Tama–o de la ventana
+                             300, 100,          // Posici—n de la ventana
                              "El Sistema Solar" // T’tulo de la ventana
                              );
   
