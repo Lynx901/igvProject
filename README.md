@@ -13,10 +13,12 @@ macOS con Xcode (RECOMENDADO)
 + Haz click en el + y añade GLUT.framework y OpenGL.framework
 + Haz click sobre “Build Settings” y busca “deprecated”
 + En “Apple LLVM 8.0 - Warnings - All Lenguajes” pon a “No” el apartado “Deprecated Functions”
-+ Cambia #include <GLUT/glut.h>  en camara.cpp, igvColor.h, igvEscena3D.h, igvFuenteLuz.h, igvTextura.h, igvInterfaz.h, Nave.cpp y Planeta.cpp por:
-					#include <OpenGL/gl.h>
-					#include <OpenGL/glu.h>
-					#include <GLUT/glut.h>
++ Cambia #include \<GLUT/glut.h>  en camara.cpp, igvColor.h, igvEscena3D.h, igvFuenteLuz.h, igvTextura.h, igvInterfaz.h, Nave.cpp y Planeta.cpp por:
+
+\#include \<OpenGL/gl.h>
+\#include \<OpenGL/glu.h>
+\#include \<GLUT/glut.h>
+
 + Ejecuta.
 + Si al ejecutar no carga las texturas, es porque en Xcode hay que meter la ruta completa del archivo, así que si pulsas shift+cmd+f y buscas “texturas” podrás localizar todos los sitios donde cambiar la ruta /texturas/algo por la ruta completa del archivo (algo como /Users/dani/Desktop/FUENTE/texturas/algo).
 
